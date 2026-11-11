@@ -7,6 +7,7 @@ public class User {
     private String email;
     private String senha;
     private String role; // "Personal" ou "Aluno"
+    private boolean ativo;
 
     public User(){}
 
@@ -15,6 +16,8 @@ public class User {
         this.email = email;
         this.senha = senha;
         this.role = role;
+        this.ativo = true;
+
     }
 
     public int getId() {
@@ -56,14 +59,16 @@ public class User {
         this.role = role;
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", senha='" + senha + '\'' +
-                ", role='" + role + '\'' +
-                '}';
+        return "User{id=" + id + ", nome='" + nome + "', role='" + role + "', ativo=" + ativo + "}";
     }
 }

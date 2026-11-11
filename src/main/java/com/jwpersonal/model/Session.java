@@ -10,20 +10,32 @@ public class Session {
     private SessionStatus status;
     private String notes; // Observação da sessão
     private LocalDateTime completedAt; //Data e hora que a sessão foi concluída.
+    private boolean registrada;
 
     public Session(){}
 
     public Session(int appointmentId) {
         this.appointmentId = appointmentId;
         this.status = SessionStatus.PENDENTE;
+        this.registrada = false;
     }
 
     public int getId() {
         return id;
     }
 
+    public boolean isRegistrada() {
+        return registrada;
+    }
+
+    public void setRegistrada(boolean registrada) {
+        this.registrada = registrada;
+    }
+
     public void setId(int id) {
         this.id = id;
+
+
     }
 
     public int getAppointmentId() {
@@ -63,9 +75,6 @@ public class Session {
         return "Session{" +
                 "id=" + id +
                 ", appointmentId=" + appointmentId +
-                ", status=" + status +
-                ", notes='" + notes + '\'' +
-                ", completedAt=" + completedAt +
-                '}';
+                ", status=" + status + ", registrada = " + registrada + "}";
     }
 }
