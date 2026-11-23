@@ -8,8 +8,8 @@ public class Session {
     private int id;
     private int appointmentId;
     private SessionStatus status;
-    private String notes; // Observação da sessão
-    private LocalDateTime completedAt; //Data e hora que a sessão foi concluída.
+    private String observacoes; // Observação da sessão
+    private LocalDateTime concluidoEm; //Data e hora que a sessão foi concluída.
     private boolean registrada;
 
     public Session(){}
@@ -54,20 +54,20 @@ public class Session {
         this.status = status;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getObservacoes() {
+        return observacoes;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
     }
 
-    public LocalDateTime getCompletedAt() {
-        return completedAt;
+    public LocalDateTime getConcluidoEm() {
+        return concluidoEm;
     }
 
-    public void setCompletedAt(LocalDateTime completedAt) {
-        this.completedAt = completedAt;
+    public void setConcluidoEm(LocalDateTime concluidoEm) {
+        this.concluidoEm = concluidoEm;
     }
 
     @Override
