@@ -10,6 +10,7 @@ import {
     Text,
     TextInput,
     View,
+    useWindowDimensions,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
@@ -36,7 +37,9 @@ export function NewAppointmentScreen({
                                          onBack,
                                          onSave,
                                      }: Props) {
+    const { width } = useWindowDimensions();
     const insets = useSafeAreaInsets();
+    const scale = Math.min(width, 430) / 430;
     const startInput = useRef<ComponentRef<typeof TextInput>>(null);
     const endInput = useRef<ComponentRef<typeof TextInput>>(null);
     const [date, setDate] = useState(editing ? formatDate(editing.data) : "");
@@ -72,22 +75,41 @@ export function NewAppointmentScreen({
                         paddingBottom: Math.max(insets.bottom, 32),
                     }}
                 >
-                    <View style={styles.header}>
-                        <Pressable
-                            accessibilityRole="button"
-                            accessibilityLabel="Voltar"
-                            hitSlop={8}
-                            onPress={onBack}
-                            style={styles.back}
-                        >
+                    <View
+                        style={[
+                            styles.header,
+                            { paddingLeft: 18 * scale, paddingRight: 34 * scale },
+                        ]}
+                    >
+                        <View style={styles.titleRow}>
+                            <Pressable
+                                accessibilityRole="button"
+                                accessibilityLabel="Voltar"
+                                hitSlop={8}
+                                onPress={onBack}
+                                style={styles.back}
+                            >
+                                <Image
+                                    source={require("../../assets/back.png")}
+                                    style={styles.backImage}
+                                    tintColor={colors.ink}
+                                />
+                            </Pressable>
+                            <Text accessibilityRole="header" style={styles.title}>
+                                {title}
+                            </Text>
+                        </View>
+                        <View style={[styles.logoCrop, { width: 94 * scale }]}>
                             <Image
-                                source={require("../../assets/back.png")}
-                                style={styles.backImage}
+                                accessibilityLabel="JW Personal Trainer"
+                                source={require("../../assets/logo.png")}
+                                style={[
+                                    styles.logo,
+                                    { width: 94 * scale, height: 94 * scale, top: -18 * scale },
+                                ]}
+                                contentFit="fill"
                             />
-                        </Pressable>
-                        <Text accessibilityRole="header" style={styles.title}>
-                            {title}
-                        </Text>
+                        </View>
                     </View>
                     <View style={styles.form}>
                         <Text style={styles.info}>Personal: {PERSONAL_NAME}</Text>
@@ -177,11 +199,14 @@ const styles = StyleSheet.create({
     fill: { flex: 1 },
     screen: { flex: 1, backgroundColor: colors.white },
     header: {
+        height: 68,
         flexDirection: "row",
-        alignItems: "center",
-        paddingHorizontal: 18,
-        gap: 12,
+        alignItems: "flex-start",
+        justifyContent: "space-between",
     },
+    titleRow: { flexDirection: "row", alignItems: "center", gap: 12 },
+    logoCrop: { width: 94, height: 52, overflow: "hidden" },
+    logo: { width: 94, height: 94, top: -18 },
     back: { width: 37, height: 37 },
     backImage: { width: 37, height: 37, transform: [{ scaleX: -1 }] },
     title: { fontFamily: fonts.body, fontSize: 20, color: colors.ink },

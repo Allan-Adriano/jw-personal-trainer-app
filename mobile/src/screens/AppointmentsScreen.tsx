@@ -199,6 +199,7 @@ export function AppointmentsScreen({ onBack }: { onBack: () => void }) {
                         <Image
                             source={require("../../assets/back.png")}
                             style={styles.backImage}
+                            tintColor={colors.ink}
                         />
                     </Pressable>
                     <Text accessibilityRole="header" style={styles.title}>
