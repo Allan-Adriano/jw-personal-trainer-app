@@ -175,3 +175,83 @@ export function validateSlot(
     }
     return { slot };
 }
+
+// Mesmas regras de AppointmentService.cancelar + CancelamentoComPrazo.
+export function cancelError(appointment: Appointment, today: string) {
+    if (appointment.status === "REALIZADO") {
+        return "Não é possível cancelar uma sessão já realizada";
+    }
+    if (appointment.status === "CANCELADO") {
+        return "Agendamento já está cancelado";
+    }
+    if (appointment.data === today) {
+        return "Cancelamento não permitido. Prazo mínimo de 24h de antecedência.";
+    }
+    return null;
+}
+
+// ---------- dados de demonstração ----------
+
+export function initialAppointments(base: string = todayIso()): Appointment[] {
+    const common = { personalId: PERSONAL_ID };
+    return [
+        {
+            ...common,
+            id: 1,
+            data: addDays(base, 2),
+            horaInicio: "18:00",
+            horaFim: "19:00",
+            status: "CONFIRMADO",
+            confirmado: true,
+        },
+        {
+            ...common,
+            id: 2,
+            data: base,
+            horaInicio: "17:00",
+            horaFim: "18:00",
+            status: "AGENDADO",
+            confirmado: false,
+        },
+        {
+            ...common,
+            id: 3,
+            data: addDays(base, 7),
+            horaInicio: "19:00",
+            horaFim: "20:00",
+            status: "REAGENDADO",
+            observacao: "Reagendado por você",
+            confirmado: false,
+        },
+        {
+            ...common,
+            id: 4,
+            data: addDays(base, -3),
+            horaInicio: "18:00",
+            horaFim: "19:00",
+            status: "REALIZADO",
+            confirmado: true,
+        },
+        {
+            ...common,
+            id: 5,
+            data: addDays(base, -7),
+            horaInicio: "07:00",
+            horaFim: "08:00",
+            status: "CANCELADO",
+            observacao: "Cancelado por você: Imprevisto no trabalho",
+            confirmado: false,
+        },
+        {
+            ...common,
+            id: 6,
+            data: addDays(base, -10),
+            horaInicio: "18:00",
+            horaFim: "19:00",
+            status: "AUSENCIA",
+            confirmado: true,
+        },
+    ];
+}
+
+
