@@ -446,7 +446,7 @@ const styles = StyleSheet.create({
         paddingVertical: 2,
     },
     badgeText: { fontFamily: fonts.body, fontSize: 13, color: colors.white },
-    badgeCancelled: { color: "#FF6B6B" },
+    badgeCancelled: { color: colors.error },
     empty: {
         marginTop: 40,
         textAlign: "center",

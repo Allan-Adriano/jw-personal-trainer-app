@@ -123,7 +123,6 @@ export function NewAppointmentScreen({
                                 setError("");
                             }}
                             placeholder="dd/mm/aaaa"
-                            placeholderTextColor="#777777"
                             keyboardType="number-pad"
                             returnKeyType="next"
                             onSubmitEditing={() => startInput.current?.focus()}
@@ -140,7 +139,6 @@ export function NewAppointmentScreen({
                                 setError("");
                             }}
                             placeholder="hh:mm"
-                            placeholderTextColor="#777777"
                             keyboardType="number-pad"
                             returnKeyType="next"
                             onSubmitEditing={() => endInput.current?.focus()}
@@ -157,7 +155,6 @@ export function NewAppointmentScreen({
                                 setError("");
                             }}
                             placeholder="hh:mm"
-                            placeholderTextColor="#777777"
                             keyboardType="number-pad"
                             returnKeyType="go"
                             onSubmitEditing={submit}
