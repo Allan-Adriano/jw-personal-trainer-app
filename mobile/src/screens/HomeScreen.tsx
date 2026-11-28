@@ -48,7 +48,13 @@ const tabs = [
   },
 ] as const;
 
-export function HomeScreen({ onSignOut }: { onSignOut: () => void }) {
+export function HomeScreen({
+  onSignOut,
+  onOpenAppointments,
+}: {
+  onSignOut: () => void;
+  onOpenAppointments?: () => void;
+}) {
   const { width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   const gallery = useRef<ComponentRef<typeof ScrollView>>(null);
@@ -321,6 +327,18 @@ export function HomeScreen({ onSignOut }: { onSignOut: () => void }) {
                     Conta
                   </Text>
                   <Text style={styles.sheetText}>Sessão de demonstração</Text>
+                  {onOpenAppointments && (
+                    <Pressable
+                      accessibilityRole="button"
+                      onPress={() => {
+                        setMenu(null);
+                        onOpenAppointments();
+                      }}
+                      style={styles.sheetAction}
+                    >
+                      <Text style={styles.sheetText}>Meus agendamentos</Text>
+                    </Pressable>
+                  )}
                   <Pressable
                     accessibilityRole="button"
                     onPress={onSignOut}
